@@ -40,32 +40,30 @@ function scanFrame() {
 
             let qrData = code.data.trim();
 
-            // Rensa bort allt skräp → bara siffror och +
+            // 1. Nya Swish-länkar
+            if (qrData.startsWith("https://app.swish.nu/")) {
+                openSwish(qrData);
+                return;
+            }
+
+            // 2. Gamla Swish deep links
+            if (qrData.startsWith("swish://")) {
+                openSwish(qrData);
+                return;
+            }
+
+            // 3. Telefonnummer → bygg en Swish-länk
             qrData = qrData.replace(/[^0-9+]/g, "");
-
-            // Om QR redan innehåller Swish-länk → öppna direkt
-            if (code.data.startsWith("swish://")) {
-                openSwish(code.data);
+            if (/^\+46\d{7,10}$/.test(qrData) || /^07\d{8}$/.test(qrData)) {
+                if (!qrData.startsWith("+")) {
+                    qrData = "+46" + qrData.substring(1);
+                }
+                const swishUrl = `https://app.swish.nu/1/p/sw/?sw=${encodeURIComponent(qrData)}&amt=1&cur=SEK&msg=Betalning`;
+                openSwish(swishUrl);
                 return;
             }
 
-            // Kontrollera om vi har ett svenskt telefonnummer
-            if (/^\+46\d{7,10}$/.test(qrData)) {
-                // Bygg Swish JSON
-                const swishJson = {
-                    version: 1,
-                    payee: qrData,
-                    amount: 1, // standardbelopp
-                    message: "Betalning"
-                };
-
-                // Swish kräver URL-enkodad JSON, inte Base64
-                const swishLink = "swish://payment?data=" + JSON.stringify(swishJson);
-                openSwish(swishLink);
-                return;
-            }
-
-            // Om inget matchar → felmeddelande
+            // 4. Ogiltig kod
             alert("Ingen giltig Swish-länk eller telefonnummer: " + code.data);
             scanning = true;
             scanFrame();
@@ -76,10 +74,8 @@ function scanFrame() {
 }
 
 function openSwish(link) {
-    // Viktigt på iOS: öppna via en användargesture
-    setTimeout(() => {
-        window.location.href = link;
-    }, 300);
+    // Viktigt på iOS: öppna i samma flik
+    window.location.href = link;
 }
 
 startButton.addEventListener("click", startScanner);
