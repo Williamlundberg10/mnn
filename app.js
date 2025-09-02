@@ -60,7 +60,7 @@ function scanFrame() {
                 };
 
                 // Swish kräver URL-enkodad JSON, inte Base64
-                const swishLink = "swish://payment?data=" + encodeURIComponent(JSON.stringify(swishJson));
+                const swishLink = "swish://payment?data=" + JSON.stringify(swishJson);
                 openSwish(swishLink);
                 return;
             }
