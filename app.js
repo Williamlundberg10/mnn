@@ -43,7 +43,6 @@ function scanFrame() {
             SwishData(qrData);
 
             scanning = true;
-            scanFrame();
         }
     }
 
