@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Swish QR" />
     <link rel="manifest" href="manifest.json">
-
     <title>Swish QR-skanner</title>
     <link rel="stylesheet" href="css/style.css" />
+    <script src="qrscanner.js"></script>
 </head>
 <body>
     <div class="container">
@@ -20,14 +20,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
-    <script src="qrscanner.js"></script>
-
-    <!-- Initialize scanner -->
     <script>
-        const scanner = new window.SwishQRCodeScanner("camera", "canvas", "status");
-        (async () => {
-            await scanner.NavigateToForm();
-        })();
-</script>
+
+        const scanner = new SwishQRCodeScanner("camera", "canvas", "status");
+        scanner.NavigateToForm();
+    </script>
 </body>
 </html>
