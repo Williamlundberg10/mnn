@@ -16,7 +16,7 @@ class SwishQRCodeScanner {
             });
 
             this.video.srcObject = stream;
-            this.video.setAttribute("playsinline", true); // iOS fix
+            this.video.setAttribute("playsinline", true);
             await this.video.play();
 
             this.scanning = true;
@@ -36,7 +36,7 @@ class SwishQRCodeScanner {
         }
     }
 
-    _scanFrame() {
+    async _scanFrame() {
         if (!this.scanning) return;
 
         if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
@@ -52,7 +52,7 @@ class SwishQRCodeScanner {
                 if (this._isSwishURL(qrText)) {
                     this.stop();
                     if (this.statusText) this.statusText.innerText = "Swish QR hittad!";
-                    const swishData = this._parseSwishURL(qrText);
+                    const swishData = await this._parseSwishURL(qrText); // <-- await here
                     if (this._resolve) this._resolve(swishData);
                     return;
                 } else {
@@ -85,23 +85,20 @@ class SwishQRCodeScanner {
     async NavigateToForm(timeout = 30000) {
         const swishData = await this.GetData(timeout);
         if (swishData) {
-            // Spara i sessionStorage
             sessionStorage.setItem("swishData", JSON.stringify(swishData));
-            // Navigera till form.html
             window.location.href = "form.html";
         }
     }
 
-    // Interna funktioner
     _isSwishURL(text) {
         return text.startsWith("https://app.swish.nu/") || text.startsWith("A");
     }
 
-    _parseSwishURL(url) {
-        console.log(url)
-        if(url[0] != "A"){
+    async _parseSwishURL(url) { // <-- make async
+        console.log(url);
+        if (url[0] != "A") {
             const params = new URL(url).searchParams;
-            if(params.get("sw") == "1231143205"){
+            if (params.get("sw") == "1231143205") {
                 return {
                     "Swish-nummer": params.get("sw") || "",
                     "$": parseFloat(params.get("amt")) || "",
@@ -121,21 +118,19 @@ class SwishQRCodeScanner {
                 "ff": 0,
                 "alt": Object.fromEntries(params.entries())
             };
-        }else{
+        } else {
             const phoneNumber = url.replace("A", "").trim();
-            const ma = getContactByPhoneNumber(phoneNumber); // <-- await here
+            const ma = await getContactByPhoneNumber(phoneNumber); // <-- await
             return {
                 "Swish-nummer": phoneNumber || "",
                 "Mottagare": ma || "",
                 "ff": 0
-
             };
         }
-
     }
-
-    
 }
+
+// Async function to get contact
 async function getContactByPhoneNumber(phoneNumber) {
     if (!('contacts' in navigator && 'ContactsManager' in window)) {
         console.log("Contacts API not supported in this browser.");
@@ -158,5 +153,6 @@ async function getContactByPhoneNumber(phoneNumber) {
         return null;
     }
 }
-// Export
+
+// Export globally
 window.SwishQRCodeScanner = SwishQRCodeScanner;
