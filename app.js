@@ -40,20 +40,17 @@ function scanFrame() {
 
             let qrData = code.data.trim();
 
-            // Om QR innehåller en Swish-länk, öppna direkt
-            if (qrData.startsWith("swish://")) {
-                window.location.href = qrData;
+            // Rensa bort ALLT utom siffror och +
+            qrData = qrData.replace(/[^0-9+]/g, "");
+
+            // Om QR innehåller en giltig Swish-länk redan → öppna direkt
+            if (code.data.startsWith("swish://")) {
+                window.location.href = code.data;
                 return;
             }
 
-            // Om QR innehåller ett telefonnummer
-            if (/^\+?\d+$/.test(qrData)) {
-                // Rensa telefonnumret
-                if (!qrData.startsWith("+")) {
-                    qrData = "+" + qrData;
-                }
-
-                // Skapa Swish-länk med standardbelopp 1 SEK
+            // Kolla om det ser ut som ett svenskt telefonnummer
+            if (/^\+46\d{7,10}$/.test(qrData)) {
                 const swishLink = `swish://payment?data=${encodeURIComponent(JSON.stringify({
                     version: 1,
                     payee: qrData,
@@ -65,7 +62,8 @@ function scanFrame() {
                 return;
             }
 
-            alert("Ingen giltig Swish-länk eller telefonnummer: " + qrData);
+            // Felmeddelande om QR inte är giltig
+            alert("Ingen giltig Swish-länk eller telefonnummer: " + code.data);
             scanning = true;
             scanFrame();
         }
