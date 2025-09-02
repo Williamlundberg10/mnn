@@ -40,31 +40,8 @@ function scanFrame() {
 
             let qrData = code.data.trim();
 
-            // 1. Nya Swish-länkar
-            if (qrData.startsWith("https://app.swish.nu/")) {
-                openSwish(qrData);
-                return;
-            }
+            SwishData(qrData);
 
-            // 2. Gamla Swish deep links
-            if (qrData.startsWith("swish://")) {
-                SwishData(qrData);
-                return;
-            }
-
-            // 3. Telefonnummer → bygg en Swish-länk
-            qrData = qrData.replace(/[^0-9+]/g, "");
-            if (/^\+46\d{7,10}$/.test(qrData) || /^07\d{8}$/.test(qrData)) {
-                if (!qrData.startsWith("+")) {
-                    qrData = "+46" + qrData.substring(1);
-                }
-                const swishUrl = `https://app.swish.nu/1/p/sw/?sw=${encodeURIComponent(qrData)}&amt=1&cur=SEK&msg=Betalning`;
-                SwishData(qrData);
-                return;
-            }
-
-            // 4. Ogiltig kod
-            alert("Ingen giltig Swish-länk eller telefonnummer: " + code.data);
             scanning = true;
             scanFrame();
         }
