@@ -38,12 +38,36 @@ function scanFrame() {
             scanning = false;
             statusText.innerText = "QR hittad! Öppnar Swish...";
 
-            if (code.data.startsWith("swish://")) {
-                window.location.href = code.data;
-            } else {
-                alert("Ingen giltig Swish-länk: " + code.data);
+            let qrData = code.data.trim();
+
+            // Om QR innehåller en Swish-länk, öppna direkt
+            if (qrData.startsWith("swish://")) {
+                window.location.href = qrData;
+                return;
             }
-            return;
+
+            // Om QR innehåller ett telefonnummer
+            if (/^\+?\d+$/.test(qrData)) {
+                // Rensa telefonnumret
+                if (!qrData.startsWith("+")) {
+                    qrData = "+" + qrData;
+                }
+
+                // Skapa Swish-länk med standardbelopp 1 SEK
+                const swishLink = `swish://payment?data=${encodeURIComponent(JSON.stringify({
+                    version: 1,
+                    payee: qrData,
+                    amount: 1,
+                    message: "Betalning"
+                }))}`;
+
+                window.location.href = swishLink;
+                return;
+            }
+
+            alert("Ingen giltig Swish-länk eller telefonnummer: " + qrData);
+            scanning = true;
+            scanFrame();
         }
     }
 
