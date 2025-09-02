@@ -40,7 +40,7 @@ function scanFrame() {
 
             let qrData = code.data.trim();
 
-            // Rensa bort skräp → bara siffror och +
+            // Rensa bort allt skräp → bara siffror och +
             qrData = qrData.replace(/[^0-9+]/g, "");
 
             // Om QR redan innehåller Swish-länk → öppna direkt
@@ -49,25 +49,23 @@ function scanFrame() {
                 return;
             }
 
-            // Om QR ser ut som ett svenskt nummer → skapa Swish-länk
+            // Kontrollera om vi har ett svenskt telefonnummer
             if (/^\+46\d{7,10}$/.test(qrData)) {
+                // Bygg Swish JSON
                 const swishJson = {
                     version: 1,
                     payee: qrData,
-                    amount: 1,
+                    amount: 1, // standardbelopp
                     message: "Betalning"
                 };
 
-                // OBS! Viktigt: Swish vill ha JSON → Base64 → URL
-                const swishData = btoa(encodeURIComponent(JSON.stringify(swishJson)));
-                console.log(swishJson)
-                console.log(swishData)
-                const swishLink = `swish://payment?data=${swishData}`;
-
+                // Swish kräver URL-enkodad JSON, inte Base64
+                const swishLink = "swish://payment?data=" + encodeURIComponent(JSON.stringify(swishJson));
                 openSwish(swishLink);
                 return;
             }
 
+            // Om inget matchar → felmeddelande
             alert("Ingen giltig Swish-länk eller telefonnummer: " + code.data);
             scanning = true;
             scanFrame();
@@ -77,10 +75,11 @@ function scanFrame() {
     requestAnimationFrame(scanFrame);
 }
 
-// Viktigt: Öppna Swish på rätt sätt för iOS
 function openSwish(link) {
-    // iOS kräver att vi triggar Swish via user-gesture
-    window.location.href = link;
+    // Viktigt på iOS: öppna via en användargesture
+    setTimeout(() => {
+        window.location.href = link;
+    }, 300);
 }
 
 startButton.addEventListener("click", startScanner);
