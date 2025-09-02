@@ -22,12 +22,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
     <script>
 
-        const scanner = new QRCodeScanner("camera", "canvas", "status");
-
-        scanner.GetData().then(data => {
-            console.log("QR Data:", data);
-            window.location.href = "form.html?qr=" + encodeURIComponent(data);
-        });
+        const scanner = new SwishQRCodeScanner("camera", "canvas", "status");
+        scanner.NavigateToForm();
     </script>
 </body>
 </html>

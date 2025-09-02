@@ -101,13 +101,18 @@
     <script>
 
         window.addEventListener('load', function() {
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            const qrData = urlParams.get("qr");
-            console.log("Mottagen QR-data:", qrData);
 
-            if (qrData) {
-                document.body.innerHTML += `<p>QR-kod: ${qrData}</p>`;
+            const swishDataJSON = sessionStorage.getItem("swishData");
+            if (swishDataJSON) {
+                const swishData = JSON.parse(swishDataJSON);
+                console.log("Mottagen Swish-data:", swishData);
+
+                // Exempel: fyll i formulär
+                document.body.innerHTML += `
+                    <p>Swish-nummer: ${swishData["Swish-nummer"]}</p>
+                    <p>Belopp: ${swishData["$"]} ${swishData.cur}</p>
+                    <p>Meddelande: ${swishData.msg}</p>
+                `;
             }
 
             function handleScroll() {
