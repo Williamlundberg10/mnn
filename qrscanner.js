@@ -103,7 +103,7 @@ class SwishQRCodeScanner {
             const params = new URL(url).searchParams;
             if(params.get("sw") == "1231143205"){
                 return {
-                    "Swish-nummer": params.get("sw") || "",
+                    "Swish-nummer": "123 114 32 05" || "",
                     "$": parseFloat(params.get("amt")) || "",
                     "Mottagare": "Perslunda Café",
                     "cur": params.get("cur") || "",
