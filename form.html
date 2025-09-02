@@ -107,12 +107,10 @@
                 const swishData = JSON.parse(swishDataJSON);
                 console.log("Mottagen Swish-data:", swishData);
 
-                // Exempel: fyll i formulär
-                document.body.innerHTML += `
-                    <p>Swish-nummer: ${swishData["Swish-nummer"]}</p>
-                    <p>Belopp: ${swishData["$"]} ${swishData.cur}</p>
-                    <p>Meddelande: ${swishData.msg}</p>
-                `;
+                document.getElementById("number-Data").value = swishData["Swish-nummer"]
+                document.getElementById("amount-Data").value = swishData["$"]
+                document.getElementById("message-Data").value = swishData.msg
+
             }
 
             function handleScroll() {
