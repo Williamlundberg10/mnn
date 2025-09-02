@@ -108,7 +108,7 @@
                 console.log("Mottagen Swish-data:", swishData);
 
                 if(swishData.ff == 1){
-                    document.getElementById("foretag").value = swishData["Mottagare"] || ""
+                    document.getElementById("receiver-Data").value = swishData["Mottagare"] || ""
                     document.getElementById("receiverF-Data").value = swishData["Företag_Namn"] || ""
                     document.getElementById("number-Data").value = swishData["Swish-nummer"] || ""
                     document.getElementById("amount-Data").value = swishData["$"] || ""
