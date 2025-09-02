@@ -40,9 +40,11 @@ function scanFrame() {
 
             let qrData = code.data.trim();
 
-            SwishData(qrData);
+            SwishData(code);
+            return;
 
             scanning = true;
+            scanFrame();
         }
     }
 
