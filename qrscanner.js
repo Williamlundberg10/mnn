@@ -1,4 +1,4 @@
-class SwishQRCodeScanner {
+window.SwishQRCodeScanner = class SwishQRCodeScanner {
     constructor(videoId = "camera", canvasId = "canvas", statusId = "status") {
         this.video = document.getElementById(videoId);
         this.canvas = document.getElementById(canvasId);
@@ -153,6 +153,3 @@ async function getContactByPhoneNumber(phoneNumber) {
         return null;
     }
 }
-
-// Export globally
-window.SwishQRCodeScanner = SwishQRCodeScanner;

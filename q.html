@@ -19,21 +19,15 @@
         <p id="status">Tryck på knappen för att starta skanning.</p>
     </div>
 
-    <!-- Load jsQR first -->
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
-    
-    <!-- Load your scanner script as a module -->
-    <script type="module" src="qrscanner.js"></script>
+    <script src="qrscanner.js"></script>
 
     <!-- Initialize scanner -->
-    <script type="module">
-        import { SwishQRCodeScanner } from './qrscanner.js'; // if you exported as module
-        const scanner = new SwishQRCodeScanner("camera", "canvas", "status");
-
-        // Call async function correctly
+    <script>
+        const scanner = new window.SwishQRCodeScanner("camera", "canvas", "status");
         (async () => {
             await scanner.NavigateToForm();
         })();
-    </script>
+</script>
 </body>
 </html>
