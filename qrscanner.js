@@ -52,7 +52,7 @@ class SwishQRCodeScanner {
                 if (this._isSwishURL(qrText)) {
                     this.stop();
                     if (this.statusText) this.statusText.innerText = "Swish QR hittad!";
-                    const swishData = await this._parseSwishURL(qrText);
+                    const swishData = this._parseSwishURL(qrText);
                     if (this._resolve) this._resolve(swishData);
                     return;
                 } else {
