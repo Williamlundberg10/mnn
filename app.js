@@ -48,7 +48,7 @@ function scanFrame() {
 
             // 2. Gamla Swish deep links
             if (qrData.startsWith("swish://")) {
-                openSwish(qrData);
+                SwishData(qrData);
                 return;
             }
 
@@ -59,7 +59,7 @@ function scanFrame() {
                     qrData = "+46" + qrData.substring(1);
                 }
                 const swishUrl = `https://app.swish.nu/1/p/sw/?sw=${encodeURIComponent(qrData)}&amt=1&cur=SEK&msg=Betalning`;
-                openSwish(swishUrl);
+                SwishData(qrData);
                 return;
             }
 
@@ -73,9 +73,8 @@ function scanFrame() {
     requestAnimationFrame(scanFrame);
 }
 
-function openSwish(link) {
-    // Viktigt på iOS: öppna i samma flik
-    window.location.href = link;
+function SwishData(data){
+    console.log(data)
 }
 
 startButton.addEventListener("click", startScanner);
