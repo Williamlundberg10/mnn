@@ -98,15 +98,18 @@ class SwishQRCodeScanner {
     }
 
     _parseSwishURL(url) {
-        const params = new URL(url).searchParams;
-        return {
-            "Swish-nummer": params.get("sw") || "",
-            "$": parseFloat(params.get("amt")) || 0,
-            "cur": params.get("cur") || "",
-            "msg": params.get("msg") || "",
-            "webURL": url || "",
-            "alt": Object.fromEntries(params.entries()) // Konverterar alla parametrar till ett vanligt objekt
-        };
+        console.log(url)
+        if(url != "A"){
+            const params = new URL(url).searchParams;
+            return {
+                "Swish-nummer": params.get("sw") || "",
+                "$": parseFloat(params.get("amt")) || 0,
+                "cur": params.get("cur") || "",
+                "msg": params.get("msg") || "",
+                "webURL": url || "",
+                "alt": Object.fromEntries(params.entries()) // Konverterar alla parametrar till ett vanligt objekt
+            };
+        }
 
     }
 }
