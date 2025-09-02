@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover, user-scalable=no">
+    
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/other.css">
+    <link rel="manifest" href="manifest.json">
+
+
+    <link rel="apple-touch-icon" type="image/jpg" sizes="512x512" href="images/logoswish.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <title>Swish</title>
+    
+</head>
+<body>
+    <div class="content" style="-webkit-user-select: none;">
+        <div class="headContent">
+            <img src="images/nordea-white.png" alt="">
+        </div>
+        <div class="logoContent">
+            <img src="images/Swish_Logo_Primary_Dark-BG_P3.png" alt="">
+        </div>
+        <div class="bottomContent1">
+            <div class="buttons999">
+                <a class="btn999" href="form.html">Swisha</a>
+                <a class="btn999" style="background-color: #122228; color: #17a4df;" href="q.html">Skanna</a>
+            </div>
+            <img class="iconsTemp" src="images/bottom.png" alt="">
+            <div class="iconContent">
+                <div class="icon">
+                    <img src="" alt="">
+                    <p>Hem</p>
+                </div>
+                <div class="icon">
+                    <img src="" alt="">
+                    <p>Förfrågningar</p>
+                </div>
+                <div class="icon">
+                    <p>Historik</p>
+                </div>
+                <div class="icon">
+                    <p>Profil</p>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+    <script src="js/index.js"></script>
+    <script src="js/k1000.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js").catch(console.error);
+        }
+        window.addEventListener('load', function() {
+            function handleScroll() {
+                if (window.innerHeight >= 677) {
+                    // Disable scrolling
+                    
+                    document.addEventListener('touchmove', preventDefaultScroll, { passive: false });
+                } else {
+                    // Enable scrolling
+                    document.removeEventListener('touchmove', preventDefaultScroll, { passive: false });
+                }
+            }
+            function preventDefaultScroll(event) {
+                event.preventDefault();
+            }
+            handleScroll(); 
+            window.addEventListener('resize', handleScroll); // Add event listener for window resize
+        });
+    </script>
+</body>
+</html>

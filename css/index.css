@@ -1,0 +1,173 @@
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body, #root{
+    font-family: montserrat;
+}
+
+.content{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background-color: #18191b;
+    overflow: hidden;
+    min-height: 667px;
+}
+
+.mainContent{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    height: 53%;
+    width: 110%;
+    background: linear-gradient(to left, #438c1d, #7ba60f);
+    border-radius: 0 0 50% 50% / 0 0 40px 40px; /* Adjust values as needed */
+}
+
+.confirmedContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#confirmedText{
+    color: white;
+    font-weight: 500;
+    font-size: 23px;
+}
+
+.confirmedContent img{
+    height: 120px;
+    border-radius: 50%;
+    animation: enlargeAndShrink 1s alternate; 
+    pointer-events: none;
+}
+
+@keyframes enlargeAndShrink {
+    0% {
+      transform: scale(1); /* Initial scale */
+    }
+    50% {
+      transform: scale(0.9); /* Enlarged scale */
+    }
+    100% {
+      transform: scale(1); /* Return to initial scale */
+    }
+  }
+
+
+
+.particle{
+    position: absolute;
+    top: 0;
+    height: 95%;
+    width: 100%;
+}
+
+#particlesClick{
+    position: absolute;
+    top: 0;
+    height: 95%;
+    width: 100%;
+    z-index: 10;
+}
+
+.textContent{
+    position: absolute;
+    top: 56%;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #a6a7a9;
+}
+
+.ref{
+    position: absolute;
+    bottom: 160%;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    height: 40px;
+    border-bottom: 1px solid #272727 ;
+    border-top: 1px solid #272727 ;
+
+}
+
+#receiverDisplay{
+    margin-top: 17px;
+    font-weight: 400;
+    color: white;
+    font-size: 23px;
+}
+
+#numberDisplay{
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+#amountDisplay{
+    margin-top: 15px;
+    font-weight: 500;
+    color: white;
+    font-size: 35px;
+}
+
+#messageDisplay{
+    color: white;
+    font-weight: 300;
+    margin-top: 15px;
+}
+
+.bottomContent{
+    position: absolute;
+    bottom: 5%;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottomContent img{
+    height: 40px;
+    pointer-events: none;
+}
+
+.exitButton{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 6%;
+    right: 25px;
+    background-color: #2b3033;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.exitButton img{
+    height: 17px;
+    pointer-events: none;
+}

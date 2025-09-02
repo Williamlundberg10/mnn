@@ -1,0 +1,173 @@
+/*startup*/
+
+.headContent{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 50px;
+    height: 50px;
+    width: 100%;
+    pointer-events: none;
+}
+
+.logoContent{
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.logoContent img{
+    width: 120px;
+    pointer-events: none;
+}
+
+.choose{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.choose button{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 20px;
+    width: 90px;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid  #17a4df;
+    background-color: transparent;
+    color: #17a4df;
+}
+
+.bottomContent1{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 0px;
+    width: 100%;
+}
+
+.buttons999{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.btn999{
+    font-weight: 400;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #17a4df;
+    height: 55px;
+    width: 40%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.iconsTemp{
+    pointer-events: none;
+    margin: auto;
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.iconContent{
+    width: 100%;
+    height: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+.iconContent p{
+    display: none;
+    margin-top: 5px;
+    color: white;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.icon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+/*Form*/
+
+.curve{
+    position: absolute;
+    top: 0;
+    background-color: #0d0e0f;
+    width: 110%;
+    height: 15%;
+    border-radius: 0 0 50% 50% / 0 0 40px 40px; /* Adjust values as needed */
+
+}
+.headContent1{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    top: 45px;
+    width: 100%;
+    height: 50px;
+}
+
+.formContent{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 16%;
+    height: 500px;
+    width: 100%;
+}
+
+.formInside{
+    width: 90%;
+}
+
+
+.formInside input{
+    background-color: transparent;
+    font-family: montserrat;
+    font-weight: 400;
+    font-size: 25px;
+    color: #96989b;
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border-bottom: 1px solid #272727 ;
+}
+
+input:focus {
+    caret-color: #17a4df; /* Change this to your desired color */
+  }
+
+.swisha{
+    font-family: montserrat;
+    font-weight: 500;
+    font-size: 20px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 50px;
+    background-color: #17a4df;
+    width: 90%;
+    border-radius: 10px;
+    bottom: 50px;
+}

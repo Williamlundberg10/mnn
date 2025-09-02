@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover, user-scalable=no">
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <link rel="stylesheet" href="css/other.css">
+
+    <link rel="manifest" href="manifest.json">
+
+
+
+    <link rel="apple-touch-icon" type="image/jpg" sizes="512x512" href="images/logoswish.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+
+    <title>Index</title>
+
+</head>
+
+<body style="-webkit-user-select: none;">
+
+    <div class="content">
+
+        <div class="curve"></div>
+
+        <div class="headContent1">
+
+            <a href="startup.html"><img style="height: 15px; padding-left: 20px;" src="images/close.png" alt=""></a>
+
+            <p style="color: white; font-weight: 500;">Swisha</p>
+
+            <p style="font-size: 25px; color: white; padding-right: 20px;">?</p>
+
+        </div>
+
+        <div class="formContent">
+
+            <div class="formInside">
+
+                <div class="choose">
+
+                    <button style="background-color: #17a4df; color: white;" id="vanlig" onclick="vanlig()">Vanlig</button>
+
+                    <button id="foretag" onclick="foretag()">Företag</button>
+
+                </div>
+
+                <input id="receiver-Data" style="margin-top: 10%;" type="text" placeholder="Mottagare">
+
+                <input id="receiverF-Data" style="margin-top: 10%; display: none;" type="text" placeholder="Företag Namn">
+
+
+
+                <input onclick="numberActive()" id="number-Data" style="margin-top: 10%;" type="tel" placeholder="Telefonnummer" maxlength="16">
+
+                <input id="amount-Data" style="margin-top: 10%;" type="tel" placeholder="Belopp">
+
+
+
+                <input id="message-Data" style="margin-top: 10%;" type="text" placeholder="Meddelande">
+
+                
+
+            </div>
+
+        </div>
+
+        <a class="swisha" id="swishaB" onclick="saveData()" href="index.html">Swisha</a>
+
+
+
+    </div> 
+
+    <script type="module" src="js/auth.js"></script>
+
+    <script src="js/storage.js"></script>
+
+    <script src="js/index.js"></script>
+
+    <script src="js/k1000.js"></script>
+
+    <script>
+
+        window.addEventListener('load', function() {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const qrData = urlParams.get("qr");
+            console.log("Mottagen QR-data:", qrData);
+
+            if (qrData) {
+                document.body.innerHTML += `<p>QR-kod: ${qrData}</p>`;
+            }
+
+            function handleScroll() {
+
+                if (window.innerHeight >= 677) {
+
+                    // Disable scrolling
+
+                    document.addEventListener('touchmove', preventDefaultScroll, { passive: false });
+
+                } else {
+
+                    // Enable scrolling
+
+                    document.removeEventListener('touchmove', preventDefaultScroll, { passive: false });
+
+                }
+
+            }
+
+            function preventDefaultScroll(event) {
+
+                event.preventDefault();
+
+            }
+
+            handleScroll(); // Call the function initially
+
+            window.addEventListener('resize', handleScroll); // Add event listener for window resize
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
