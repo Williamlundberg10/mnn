@@ -59,7 +59,7 @@ function scanFrame() {
                 };
 
                 // OBS! Viktigt: Swish vill ha JSON → Base64 → URL
-                const swishData = btoa(unescape(JSON.stringify(swishJson)));
+                const swishData = btoa(encodeURIComponent(JSON.stringify(swishJson)));
                 console.log(swishJson)
                 console.log(swishData)
                 const swishLink = `swish://payment?data=${swishData}`;
