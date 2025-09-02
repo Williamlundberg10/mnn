@@ -2,7 +2,6 @@ const CACHE_NAME = "swish-qr-cache-v2"; // Update version to force cache refresh
 const PRECACHE_URLS = [
     "/",
     "/index.html",
-    "/script.js"
 ];
 
 // Install event: cache files
