@@ -2,24 +2,25 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Swish QR" />
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="manifest" href="manifest.json">
-    <title>Swish QR Skanna</title>
+    <title>Swish QR-skanner</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <div class="container">
         <h1>Swish QR-skanner</h1>
         <video id="camera" autoplay playsinline></video>
-        <p id="status">Skannar QR-kod...</p>
+        <canvas id="canvas" hidden></canvas>
+        <p id="status">Tryck på knappen för att starta skanning.</p>
         <button id="startScan">Starta skanning</button>
     </div>
 
-    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
