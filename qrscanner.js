@@ -123,7 +123,7 @@ class SwishQRCodeScanner {
             };
         }else{
             const phoneNumber = url.replace("A", "").trim();
-            const ma = await getContactByPhoneNumber(phoneNumber); // <-- await here
+            const ma = getContactByPhoneNumber(phoneNumber); // <-- await here
             return {
                 "Swish-nummer": phoneNumber || "",
                 "Mottagare": ma || "",
