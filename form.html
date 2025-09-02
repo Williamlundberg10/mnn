@@ -108,14 +108,17 @@
                 console.log("Mottagen Swish-data:", swishData);
 
                 if(swishData.ff == 1){
+                    foretag()
                     document.getElementById("receiver-Data").value = swishData["Mottagare"] || ""
                     document.getElementById("receiverF-Data").value = swishData["Företag_Namn"] || ""
                     document.getElementById("number-Data").value = swishData["Swish-nummer"] || ""
                     document.getElementById("amount-Data").value = swishData["$"] || ""
+                }else{
+                    vanlig()
+                    document.getElementById("number-Data").value = swishData["Swish-nummer"] || ""
+                    document.getElementById("amount-Data").value = swishData["$"] || ""
+                    document.getElementById("message-Data").value = swishData.msg || ""
                 }
-                document.getElementById("number-Data").value = swishData["Swish-nummer"] || ""
-                document.getElementById("amount-Data").value = swishData["$"] || ""
-                document.getElementById("message-Data").value = swishData.msg || ""
 
             }
 
