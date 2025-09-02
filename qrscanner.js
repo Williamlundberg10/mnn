@@ -101,17 +101,22 @@ class SwishQRCodeScanner {
         console.log(url)
         if(url[0] != "A"){
             const params = new URL(url).searchParams;
-            return {
-                "Swish-nummer": params.get("sw") || "",
-                "$": parseFloat(params.get("amt")) || 0,
-                "cur": params.get("cur") || "",
-                "msg": params.get("msg") || "",
-                "webURL": url || "",
-                "alt": Object.fromEntries(params.entries()) // Konverterar alla parametrar till ett vanligt objekt
-            };
+            if(params.get("sw") == "1231143205"){
+                return {
+                    "Swish-nummer": params.get("sw") || "",
+                    "$": "",
+                    "Mottagare": "Perslunda Café",
+                    "cur": params.get("cur") || "",
+                    "msg": "",
+                    "Företag_Namn": "OCKELBO KOMMUN",
+                    "ff": 1,
+                    "alt": Object.fromEntries(params.entries())
+                };
+            }
         }else{
             return {
                 "Swish-nummer": url.replace("A", " ") || "",
+                "ff": 0
 
             };
         }
