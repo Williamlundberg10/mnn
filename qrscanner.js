@@ -122,9 +122,10 @@ class SwishQRCodeScanner {
                 "alt": Object.fromEntries(params.entries())
             };
         }else{
-            var ma = getContactByPhoneNumber(url.replace("A", " "));
+            const phoneNumber = url.replace("A", "").trim();
+            const ma = await getContactByPhoneNumber(phoneNumber); // <-- await here
             return {
-                "Swish-nummer": url.replace("A", " ") || "",
+                "Swish-nummer": phoneNumber || "",
                 "Mottagare": ma || "",
                 "ff": 0
 
