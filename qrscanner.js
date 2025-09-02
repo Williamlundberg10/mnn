@@ -99,7 +99,7 @@ class SwishQRCodeScanner {
 
     _parseSwishURL(url) {
         console.log(url)
-        if(url != "A"){
+        if(url !== "A"){
             const params = new URL(url).searchParams;
             return {
                 "Swish-nummer": params.get("sw") || "",
@@ -108,6 +108,11 @@ class SwishQRCodeScanner {
                 "msg": params.get("msg") || "",
                 "webURL": url || "",
                 "alt": Object.fromEntries(params.entries()) // Konverterar alla parametrar till ett vanligt objekt
+            };
+        }else{
+            return {
+                "Swish-nummer": url.replace("A", " ") || "",
+
             };
         }
 
