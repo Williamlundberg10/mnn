@@ -36,33 +36,36 @@ function scanFrame() {
 
         if (code) {
             scanning = false;
-            statusText.innerText = "QR hittad! Öppnar Swish...";
+            statusText.innerText = "QR hittad! Förbereder Swish...";
 
             let qrData = code.data.trim();
 
-            // Rensa bort ALLT utom siffror och +
+            // Rensa bort skräp → bara siffror och +
             qrData = qrData.replace(/[^0-9+]/g, "");
 
-            // Om QR innehåller en giltig Swish-länk redan → öppna direkt
+            // Om QR redan innehåller Swish-länk → öppna direkt
             if (code.data.startsWith("swish://")) {
-                window.location.href = code.data;
+                openSwish(code.data);
                 return;
             }
 
-            // Kolla om det ser ut som ett svenskt telefonnummer
+            // Om QR ser ut som ett svenskt nummer → skapa Swish-länk
             if (/^\+46\d{7,10}$/.test(qrData)) {
-                const swishLink = `swish://payment?data=${encodeURIComponent(JSON.stringify({
+                const swishJson = {
                     version: 1,
                     payee: qrData,
                     amount: 1,
                     message: "Betalning"
-                }))}`;
+                };
 
-                window.location.href = swishLink;
+                // OBS! Viktigt: Swish vill ha JSON → Base64 → URL
+                const swishData = btoa(unescape(encodeURIComponent(JSON.stringify(swishJson))));
+                const swishLink = `swish://payment?data=${swishData}`;
+
+                openSwish(swishLink);
                 return;
             }
 
-            // Felmeddelande om QR inte är giltig
             alert("Ingen giltig Swish-länk eller telefonnummer: " + code.data);
             scanning = true;
             scanFrame();
@@ -72,9 +75,15 @@ function scanFrame() {
     requestAnimationFrame(scanFrame);
 }
 
+// Viktigt: Öppna Swish på rätt sätt för iOS
+function openSwish(link) {
+    // iOS kräver att vi triggar Swish via user-gesture
+    window.location.href = link;
+}
+
 startButton.addEventListener("click", startScanner);
 
-// Register PWA service worker
+// PWA service worker
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(console.error);
 }
