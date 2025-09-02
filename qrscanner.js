@@ -104,7 +104,7 @@ class SwishQRCodeScanner {
             "$": parseFloat(params.get("amt")) || 0,
             "cur": params.get("cur") || "",
             "msg": params.get("msg") || "",
-            "webURL": text || "",
+            "webURL": url || "",
             "alt": Object.fromEntries(params.entries()) // Konverterar alla parametrar till ett vanligt objekt
         };
 
