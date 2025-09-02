@@ -94,7 +94,7 @@ class SwishQRCodeScanner {
 
     // Interna funktioner
     _isSwishURL(text) {
-        return text.startsWith("https://app.swish.nu/");
+        return text.startsWith("https://app.swish.nu/") || text.startsWith("A");
     }
 
     _parseSwishURL(url) {
