@@ -68,6 +68,7 @@
     background-color: #17a4df;
     height: 55px;
     width: 40%;
+    gap: 5px;
     border-radius: 10px;
     margin-bottom: 10px;
 }
