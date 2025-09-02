@@ -115,6 +115,7 @@
                     document.getElementById("amount-Data").value = swishData["$"] || ""
                 }else{
                     vanlig()
+                    document.getElementById("receiver-Data").value = swishData["Mottagare"] || ""
                     document.getElementById("number-Data").value = swishData["Swish-nummer"] || ""
                     document.getElementById("amount-Data").value = swishData["$"] || ""
                     document.getElementById("message-Data").value = swishData.msg || ""

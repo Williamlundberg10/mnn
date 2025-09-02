@@ -104,25 +104,58 @@ class SwishQRCodeScanner {
             if(params.get("sw") == "1231143205"){
                 return {
                     "Swish-nummer": params.get("sw") || "",
-                    "$": "",
+                    "$": parseFloat(params.get("amt")) || "",
                     "Mottagare": "Perslunda Café",
                     "cur": params.get("cur") || "",
-                    "msg": "",
                     "Företag_Namn": "OCKELBO KOMMUN",
                     "ff": 1,
                     "alt": Object.fromEntries(params.entries())
                 };
             }
+            return {
+                "Swish-nummer": params.get("sw") || "",
+                "$": parseFloat(params.get("amt")) || "",
+                "Mottagare": "",
+                "cur": params.get("cur") || "",
+                "msg": params.get("msg") || "",
+                "ff": 0,
+                "alt": Object.fromEntries(params.entries())
+            };
         }else{
+            var ma = await getContactByPhoneNumber(url.replace("A", " "));
             return {
                 "Swish-nummer": url.replace("A", " ") || "",
+                "Mottagare": ma || "",
                 "ff": 0
 
             };
         }
 
     }
-}
 
+    
+}
+async function getContactByPhoneNumber(phoneNumber) {
+    if (!('contacts' in navigator && 'ContactsManager' in window)) {
+        console.log("Contacts API not supported in this browser.");
+        return null;
+    }
+
+    try {
+        const props = ['name', 'tel'];
+        const opts = { multiple: true };
+        const contacts = await navigator.contacts.select(props, opts);
+
+        const contact = contacts.find(c =>
+            c.tel.some(t => t.replace(/\D/g, '') === phoneNumber.replace(/\D/g, ''))
+        );
+
+        if (contact) return contact.name[0];
+        return null;
+    } catch (err) {
+        console.error("Error accessing contacts:", err);
+        return null;
+    }
+}
 // Export
 window.SwishQRCodeScanner = SwishQRCodeScanner;
