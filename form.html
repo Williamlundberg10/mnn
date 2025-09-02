@@ -107,9 +107,9 @@
                 const swishData = JSON.parse(swishDataJSON);
                 console.log("Mottagen Swish-data:", swishData);
 
-                document.getElementById("number-Data").value = swishData["Swish-nummer"]
-                document.getElementById("amount-Data").value = swishData["$"]
-                document.getElementById("message-Data").value = swishData.msg
+                document.getElementById("number-Data").value = swishData["Swish-nummer"] || ""
+                document.getElementById("amount-Data").value = swishData["$"] || ""
+                document.getElementById("message-Data").value = swishData.msg || ""
 
             }
 
