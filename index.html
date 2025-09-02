@@ -10,10 +10,11 @@
     <link rel="manifest" href="manifest.json">
     <title>Swish QR-skanner</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="qrscanner.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Swish QR-skanner3</h1>
+        <h1>Swish QR-skanner</h1>
         <video id="camera" autoplay playsinline></video>
         <canvas id="canvas" hidden></canvas>
         <p id="status">Tryck på knappen för att starta skanning.</p>
@@ -21,9 +22,18 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
-    <script src="app.js"></script>
+    <script>
+
+        const scanner = new QRCodeScanner("camera", "canvas", "status");
+
+        scanner.GetData().then(data => {
+            console.log("QR Data:", data);
+            window.location.href = "in.html";
+        });
+
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js").catch(console.error);
+        }
+    </script>
 </body>
 </html>
-
-
-
