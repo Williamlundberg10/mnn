@@ -99,7 +99,7 @@ class SwishQRCodeScanner {
 
     _parseSwishURL(url) {
         console.log(url)
-        if(url[0] !== "A"){
+        if(url[0] != "A"){
             const params = new URL(url).searchParams;
             return {
                 "Swish-nummer": params.get("sw") || "",
