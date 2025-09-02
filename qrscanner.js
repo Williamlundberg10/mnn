@@ -103,7 +103,8 @@ class SwishQRCodeScanner {
             "Swish-nummer": params.get("sw") || "",
             "$": parseFloat(params.get("amt")) || 0,
             "cur": params.get("cur") || "",
-            "msg": params.get("msg") || ""
+            "msg": params.get("msg") || "",
+            "alt": params || ""
         };
     }
 }
