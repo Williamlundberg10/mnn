@@ -1,4 +1,4 @@
-const CACHE_NAME = "swish-qr-cache-v3"; // Update version to force cache refresh
+const CACHE_NAME = "swish-qr-cache-v4"; // Update version to force cache refresh
 const PRECACHE_URLS = [
 ];
 
