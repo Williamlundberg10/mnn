@@ -1,7 +1,7 @@
 {
     "display": "standalone",
     "orientation": "portrait-primary",
-    "start_url": "startup.html",
+    "start_url": "/mnn",
     "short_name": "Swish",
     "background_color": "#f7f7f7",
     "theme_color": "#00bfa5"
